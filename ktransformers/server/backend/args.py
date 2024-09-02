@@ -13,11 +13,11 @@ class ConfigArgs(BaseModel):
 
     paged : bool = Field(True,description='Wether to use paged attention kv cache')
 
-    # total_context: int = Field(16384, description="Total number of tokens to allocate space for. This is not the max_seq_len supported by the model but the total to distribute dynamically over however many jobs are active at once")
-    total_context: int = Field(2**18, description="Total number of tokens to allocate space for. This is not the max_seq_len supported by the model but the total to distribute dynamically over however many jobs are active at once")
+    total_context: int = Field(16384, description="Total number of tokens to allocate space for. This is not the max_seq_len supported by the model but the total to distribute dynamically over however many jobs are active at once")
+    # total_context: int = Field(2**18, description="Total number of tokens to allocate space for. This is not the max_seq_len supported by the model but the total to distribute dynamically over however many jobs are active at once")
     max_batch_size: int = Field(20 if paged else 1, description="Max number of batches to run at once, assuming the sequences will fit within total_context")
     max_chunk_size: int = Field(2048, description="Max chunk size. Determines the size of prefill operations. Can be reduced to reduce pauses whenever a new job is started, but at the expense of overall prompt ingestion speed")
-    max_new_tokens: int = Field(500, description="Max new tokens per completion. For this example applies to all jobs")
+    max_new_tokens: int = Field(2048, description="Max new tokens per completion. For this example applies to all jobs")
     json_mode: bool = Field(False, description="Use LMFE to constrain the output to JSON format. See schema and details below")
     healing: bool = Field(False, description="Demonstrate token healing")
     ban_strings: Optional[list] = Field(None, description="Ban some phrases maybe")
