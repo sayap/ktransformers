@@ -183,7 +183,7 @@ class KDeepseekV2Attention(BaseInjectedModule, DeepseekV2Attention):
         cur_idx = 0
         while cur_idx < q_len:
             if attention_mask is not None:
-                chunk_mask = attention_mask[:, :, cur_idx:min(cur_idx + self.chunck_size, q_len), ...]
+                chunck_mask = attention_mask[:, :, cur_idx:min(cur_idx + self.chunck_size, q_len), ...]
             else:
                 # generate chunk_mask automatically.
                 self.attn_mask = \
